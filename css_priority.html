@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS priority</title>
+    <style>
+        #first-id{
+            color : orange
+        }
+        li{
+            color: red;
+            color: blue;
+        }
+        /* Specifity increases as we follow the below 3 stylings */
+        .first-class{
+            color: red;
+        }
+        li[draggable]{
+            color: purple;
+        }
+        
+        ol ol li{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flow of styling</h1>
+    <ol>
+        <li>Importance</li>
+        <li>Type</li>
+            <h4>Order from lowest to highest priority</h4>
+            <ol>
+                <li>External</li>
+                <li>Internal</li>
+                <li>Inline</li>
+            </ol>
+        
+        <li id ="first-id" class="first-class" draggable="true">Specificity based on selector</li>
+        <h4>Order from lowest to highest priority</h4>
+        <ol>
+                <li>tag name</li>
+                <li>class</li>
+                <li>Attribute</li>
+                <li>Id</li>
+        </ol>
+        <li>Position : The lower down the rule the more important it is for same selector</li>
+        
+    </ol>
+</body>
+</html>
