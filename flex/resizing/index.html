@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resizing in Flex</title>
+    <style>
+        .container{
+            border: 2px solid black;
+            display: flex;
+            flex-direction:row;
+               width: 80%;
+            gap : 10px;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        .container > *{
+            flex-basis: 100px;
+            border : 2px solid cyan;
+            padding: 10px;
+            flex-grow: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+       <div class="home">Home</div>
+       <div class="about">About</div>
+       <div class="contact">Contact</div>
+       <div class="description"> The best programming school in the world</div>
+    </div>
+</body>
+</html>
