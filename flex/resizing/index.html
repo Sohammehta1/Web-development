@@ -7,18 +7,31 @@
     <style>
         .container{
             border: 2px solid black;
-            display: flex;
+            display: flex ;
             flex-direction:row;
-               width: 80%;
+            width: 80%;
             gap : 10px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             padding: 10px;
+            margin: 10px;
         }
         .container > *{
-            flex-basis: 100px;
+            /* flex : 1 1 0; */
+            flex : 1;
+            /* flex-basis: 300px; */
+            /* max-width:100px; */
+            /* min-width: 300px; */
             border : 2px solid cyan;
             padding: 10px;
-            flex-grow: 1;
+            /* When flex grow is set to 1 the width/height will increase in proportion to the space available to the container */
+            /* flex-grow: 1; */
+            /* width: 200px; When flex basis will be set width will be ignored */
+            /* flex-shrink: 1; */
+        }
+        .description{
+            /* flex-basis: 280px; */
+            flex : 2 1 0;
+            
         }
 
     </style>
