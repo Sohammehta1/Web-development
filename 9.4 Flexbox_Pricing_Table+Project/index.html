@@ -15,6 +15,7 @@
       .pricing-container{
         height:  100vh;
         display: flex;
+        /* flex-direction: column; */
         align-items: center;
         gap : 2rem;
         width : 100%;
@@ -50,7 +51,7 @@
       /* Hint: What can you do with a media query and flexbox? */
       @media (max-width: 1250px) {
         .pricing-container{
-          height: 100%;
+          height: 100%; /*Changing height from 100 of viewport to 100% of the content so that it can be scrolled*/
           flex-direction: column;
         }
       }
