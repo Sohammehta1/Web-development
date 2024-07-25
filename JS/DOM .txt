@@ -1,0 +1,30 @@
+The document object in JavaScript represents your web page. It’s the root node of the HTML document. Here are some ways you can use it:
+
+Finding HTML Elements:
+    document.getElementById(id): Find an element by its ID.
+
+    document.getElementsByTagName(name): Find elements by tag name.
+
+    document.getElementsByClassName(name): Find elements by class name.
+
+Changing HTML Elements:
+    element.innerHTML = newHtmlContent: Change the inner HTML of an element.
+
+    element.attribute = newValue: Change an attribute value.
+
+    element.style.property = newStyle: Change the style of an element.
+
+Adding and Deleting Elements:
+    document.createElement(element): Create an HTML element.
+
+    document.removeChild(element): Remove an HTML element.
+
+    document.appendChild(element): Add an HTML element.
+
+    document.replaceChild(newElement, oldElement): Replace an HTML element.
+
+    document.write(text): Write into the HTML output stream.
+
+Adding Event Handlers:
+
+    document.getElementById(id).onclick = function() { code }: Add an event handler to an onclick event.

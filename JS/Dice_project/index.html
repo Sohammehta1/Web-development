@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Foldit:wght@100..900&display=swap');
+        @font-face {
+        font-family: 'CoolJazzz'; /* Choose a unique name for your font */
+        src: url('./cooljazz.woff') format('woff');
+        /* Add other font properties (e.g., font-weight, font-style) if needed */
+        }
+
+    </style>
+    
+
+    <style>
+        body{
+            background-color: rgb(53, 47, 56);
+        }
+        #title{
+            color: rgb(48, 158, 107);
+            font-size: 3rem;
+            font-family: 'Edu AU VIC WA NT Hand', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        #Dice{
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        p{
+            color: rgb(48, 158, 107);
+            font-size: 2.5rem;
+            font-family: 'CoolJazzz', sans-serif;
+
+        }
+        button{
+            height: 100px;
+            width: 200px;
+            border-radius: 1rem;
+            font-size: 2rem;
+            font-family: 'CoolJazzz', sans-serif;
+            color: rgb(48, 158, 107);
+            background-color: rgb(0, 255, 242);
+            box-shadow: 10px 10px 5px 0px;
+            align-self: center;
+        }
+        button:hover{
+            background-color: rgba(14, 226, 233, 0.795);
+        }
+    </style>
+</head>
+<body>
+    <div id="title">
+        <h1 style="margin-bottom: 25px;">🚩 Roll the dice! </h1>
+    </div>
+    <div id="Dice" >
+        <!-- Assign value to the dice -->
+        <div id="player1">
+            <p>Player 1</p>
+            <img src="images/dice6.png" alt="">
+        </div>
+        <button type="button" onclick="RollDice()">Roll</button>
+        <div id="player2">
+            <p>Player 2</p>
+            <img src="images/dice6.png" alt="">
+        </div>
+    </div>
+    <script>
+
+        function RollDice(){
+            let dice1 =  Math.floor(Math.random()*6)+1;
+            let dice2 =  Math.floor(Math.random()*6)+1;
+            document.querySelector('#player1 img').setAttribute('src',`images/dice${dice1}.png`);
+            document.querySelector('#player2 img').setAttribute('src',`images/dice${dice2}.png`);
+            var msg;
+            if(dice1>dice2){
+                msg = "Player 1 Wins!";
+            }
+            else if (dice1 <dice2){
+                msg = "Player 2 Wins!";
+            }   
+            else{
+                msg = "Draw";
+            }
+            document.querySelector('#title h1').innerHTML = msg;
+
+        }
+    </script>
+</body>
+</html>
