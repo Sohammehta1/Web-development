@@ -10,12 +10,26 @@ drum_list[6].style.background ='url(images/kick.png)';
 
 // add sounds as above 
 var tom1 = new Audio('sounds/tom-1.mp3');
+// tom1.playbackRate = 2; // Play at 2x speed
+
 var tom2 = new Audio('sounds/tom-2.mp3');
+// tom2.playbackRate = 2; // Play at 2x speed
+
 var tom3 = new Audio('sounds/tom-3.mp3');
+// tom3.playbackRate = 2; // Play at 2x speed
+
 var tom4 = new Audio('sounds/tom-4.mp3');
+// tom4.playbackRate = 2; // Play at 2x speed
+
 var snare= new Audio('sounds/snare.mp3');
+// snare.playbackRate = 2; // Play at 2x speed
+
 var crash = new Audio('sounds/crash.mp3');
+// crach.playbackRate = 2; // Play at 2x speed
+
 var kick_bass = new Audio('sounds/kick-bass.mp3');
+// kick_bass.playbackRate = 2; // Play at 2x speed
+
 
 drum_list[0].addEventListener('click',function(){
     tom1.play();});
@@ -58,3 +72,4 @@ document.addEventListener('keypress', function (event) {
             break;
     }
 });
+
