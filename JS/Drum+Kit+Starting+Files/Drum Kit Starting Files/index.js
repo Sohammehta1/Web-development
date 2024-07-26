@@ -1,13 +1,3 @@
-var drum_list = document.querySelectorAll('.drum');
-// console.log(drum_list);
-drum_list[0].style.background ='url(images/tom1.png)';
-drum_list[1].style.background ='url(images/tom2.png)';
-drum_list[2].style.background ='url(images/tom3.png)';
-drum_list[3].style.background ='url(images/tom4.png)';
-drum_list[4].style.background ='url(images/snare.png)';
-drum_list[5].style.background ='url(images/crash.png)';
-drum_list[6].style.background ='url(images/kick.png)';
-
 // add sounds as above 
 var tom1 = new Audio('sounds/tom-1.mp3');
 // tom1.playbackRate = 2; // Play at 2x speed
@@ -27,24 +17,17 @@ var snare= new Audio('sounds/snare.mp3');
 var crash = new Audio('sounds/crash.mp3');
 // crach.playbackRate = 2; // Play at 2x speed
 
-var kick_bass = new Audio('sounds/kick-bass.mp3');
+var kick = new Audio('sounds/kick.mp3');
 // kick_bass.playbackRate = 2; // Play at 2x speed
 
 
-drum_list[0].addEventListener('click',function(){
-    tom1.play();});
-drum_list[1].addEventListener('click',function(){tom2.play();});
-drum_list[2].addEventListener('click',function(){tom3.play();});
-drum_list[3].addEventListener('click',function(){tom4.play();});
-drum_list[4].addEventListener('click',function(){snare.play();});
-drum_list[5].addEventListener('click',function(){crash.play();});
-drum_list[6].addEventListener('click',function(){kick_bass.play();});
+var drum_list = document.querySelectorAll('.drum');var body = document.getElementsByTagName('body')[0];
+var names    = ['tom1','tom2','tom3','tom4','snare','crash','kick'];
 
-var body = document.getElementsByTagName('body')[0];
-document.addEventListener('keypress', function (event) {
-    event = event || window.event;
-    const key = event.key.toLowerCase(); // Convert key to lowercase for consistency
 
+
+
+function make_sound(key){
     switch (key) {
         case 'w':
             tom1.play();
@@ -65,11 +48,39 @@ document.addEventListener('keypress', function (event) {
             crash.play();
             break;
         case 'l':
-            kick_bass.play();
+            kick.play();
             break;
         default:
             // Handle other keys if needed
             break;
     }
+}
+
+function display_animation(key){
+    var active_button = document.querySelector(`.${key}`);
+    active_button.classList.add('pressed');
+    setTimeout(function(){
+        active_button.classList.remove('pressed');
+    },100)
+}
+
+for(let i = 0;i<drum_list.length;i++){
+    drum_list[i].style.background =`url(images/${names[i]}.png)`;
+
+    
+
+    drum_list[i].addEventListener('click', function(){
+        var button_innerHTML = this.innerHTML;
+        make_sound(button_innerHTML);
+        display_animation(button_innerHTML);
+    })
+}
+
+
+
+var body = document.getElementsByTagName('body')[0];
+body.addEventListener('keypress', function (event) {
+    make_sound(event.key);
+    display_animation(event.key);
 });
 
