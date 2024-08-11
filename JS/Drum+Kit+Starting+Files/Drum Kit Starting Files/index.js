@@ -21,48 +21,51 @@ var kick = new Audio('sounds/kick.mp3');
 // kick_bass.playbackRate = 2; // Play at 2x speed
 
 
-var drum_list = document.querySelectorAll('.drum');var body = document.getElementsByTagName('body')[0];
+var drum_list = $('.drum');
+// var body = document.getElementsByTagName('body')[0];
 var names    = ['tom1','tom2','tom3','tom4','snare','crash','kick'];
 
 
 
 
-function make_sound(key){
-    switch (key) {
-        case 'w':
-            tom1.play();
-            break;
-        case 'a':
-            tom2.play();
-            break;
-        case 's':
-            tom3.play();
-            break;
-        case 'd':
-            tom4.play();
-            break;
-        case 'j':
-            snare.play();
-            break;
-        case 'k':
-            crash.play();
-            break;
-        case 'l':
-            kick.play();
-            break;
-        default:
-            // Handle other keys if needed
-            break;
-    }
-}
+
 
 function display_animation(key){
-    var active_button = document.querySelector(`.${key}`);
-    active_button.classList.add('pressed');
+    $(`.${key}`).addClass('pressed');
+
+    
     setTimeout(function(){
-        active_button.classList.remove('pressed');
+        $(`.${key}`).removeClass('pressed');
     },100)
 }
+
+function make_sound(key){
+    switch (key) {
+    case 'w':
+        tom1.play();
+        break;
+    case 'a':
+        tom2.play();
+        break;
+    case 's':
+        tom3.play();
+        break;
+    case 'd':
+        tom4.play();
+        break;
+    case 'j':
+        snare.play();
+        break;
+    case 'k':
+        crash.play();
+        break;
+    case 'l':
+        kick.play();
+        break;
+    default:
+        // Handle other keys if needed
+        break;
+}}
 
 for(let i = 0;i<drum_list.length;i++){
     drum_list[i].style.background =`url(images/${names[i]}.png)`;
@@ -77,10 +80,13 @@ for(let i = 0;i<drum_list.length;i++){
 }
 
 
-
-var body = document.getElementsByTagName('body')[0];
-body.addEventListener('keypress', function (event) {
-    make_sound(event.key);
-    display_animation(event.key);
+$(document).keydown(function(key){
+    var key = event.key.toLowerCase();
+    display_animation(key);
+    make_sound(key);
 });
+
+
+
+
 

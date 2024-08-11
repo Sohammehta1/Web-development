@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <h1>jQuery</h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+    </script>
+    <script> $("h1").css("color", "red");
+       $("h1").hover(function(){
+           $(this).css("color", "blue");
+       },function(){
+           $(this).css("color","red");
+       })
+
+       $("h1").before("<button>Click me</button>");
+       $("button").css({
+        "background-color":"blue",
+        "color":"white",
+        "box-shadow":"5px 5px 5px black",
+        "height":"2rem",
+        "width":"5rem",
+       })
+    </script>
+</body>
+</html>
+

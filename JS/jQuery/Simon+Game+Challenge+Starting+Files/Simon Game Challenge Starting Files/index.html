@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Simon</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+</head>
+
+<body>
+  <h1 id="level-title">Press A Key to Start</h1>
+  <div class="container">
+    <div class="row">
+      <div type="button" id="green" class="btn green"></div>
+      <div type="button" id="red" class="btn red"></div>
+    </div>
+    <div class="row">
+      <div type="button" id="yellow" class="btn yellow"></div>
+      <div type="button" id="blue" class="btn blue"></div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    var blue = new Audio('sounds/blue.mp3');
+    var red = new Audio('sounds/red.mp3');
+    var green = new Audio('sounds/green.mp3');
+    var yellow = new Audio('sounds/yellow.mp3');
+
+    function displayAnimation(color) {
+      $(`#${color}`).addClass('pressed');
+      setTimeout(() => {
+        $(`#${color}`).removeClass('pressed');
+      }, 100);
+    }
+
+    function playSound(color) {
+      switch (color) {
+        case "blue":
+          blue.play();
+          break;
+        case "red":
+          red.play();
+          break;
+        case "green":
+          green.play();
+          break;
+        case "yellow":
+          yellow.play();
+          break;
+      }
+    }
+
+    var gameStarted = false;
+    var level = 1;
+    var iterator = 0;
+    var buttons = ["red", "blue", "green", "yellow"];
+    var sequence = [];
+    var userInput = [];
+
+    function startGame() {
+      sequence = [];
+      userInput = [];
+      level = 1;
+      iterator = 0;
+      $("h1").text("Level " + level);
+      nextSequence();
+    }
+
+    function nextSequence() {
+      userInput = [];
+      iterator = 0;
+      var randomColor = buttons[Math.floor(Math.random() * 4)];
+      sequence.push(randomColor);
+      sequence.forEach((color, index) => {
+        setTimeout(() => {
+          playSound(color);
+          displayAnimation(color);
+        }, 1000 * index);
+      });
+    }
+
+    $(document).keydown(function () {
+      if (!gameStarted) {
+        $("h1").text("Level " + level);
+        $("body").css("background-color", "#011F3F");
+        gameStarted = true;
+        $(".btn").click(function () {
+          var color = this.id;
+          playSound(color);
+          displayAnimation(color);
+          checkValidity(color);
+        });
+        startGame();
+      }
+    });
+
+    function checkValidity(color) {
+      if (color === sequence[iterator]) {
+        iterator++;
+        if (iterator === sequence.length) {
+          level++;
+          $("h1").text("Level " + level);
+          setTimeout(nextSequence, 1000);
+        }
+      } else {
+        gameStarted = false;
+        $("h1").text("Game Over, Press Any Key to Restart");
+        $("body").css("background-color", "red");
+        $("body").css("background-color", "#011F3F"); // Revert back to original color
+      }
+    }
+  </script>
+</body>
+
+</html>
