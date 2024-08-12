@@ -22,20 +22,14 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script>
+
     var blue = new Audio('sounds/blue.mp3');
     var red = new Audio('sounds/red.mp3');
     var green = new Audio('sounds/green.mp3');
     var yellow = new Audio('sounds/yellow.mp3');
 
-    function displayAnimation(color) {
-      $(`#${color}`).addClass('pressed');
-      setTimeout(() => {
-        $(`#${color}`).removeClass('pressed');
-      }, 100);
-    }
-
-    function playSound(color) {
-      switch (color) {
+    function makeSound(color){
+      switch(color){
         case "blue":
           blue.play();
           break;
@@ -48,68 +42,82 @@
         case "yellow":
           yellow.play();
           break;
+        default:
+          break
       }
     }
 
-    var gameStarted = false;
-    var level = 1;
-    var iterator = 0;
-    var buttons = ["red", "blue", "green", "yellow"];
-    var sequence = [];
-    var userInput = [];
-
-    function startGame() {
-      sequence = [];
-      userInput = [];
-      level = 1;
-      iterator = 0;
-      $("h1").text("Level " + level);
-      nextSequence();
+    function displayAnimation(color){
+      $(`#${color}`).addClass('pressed');
+      setTimeout(()=>{ $(`#${color}`).addClass('pressed').removeClass('pressed')},100);
     }
 
-    function nextSequence() {
-      userInput = [];
-      iterator = 0;
-      var randomColor = buttons[Math.floor(Math.random() * 4)];
-      sequence.push(randomColor);
-      sequence.forEach((color, index) => {
-        setTimeout(() => {
-          playSound(color);
-          displayAnimation(color);
-        }, 1000 * index);
-      });
+    gameStarted = false;
+    level =  1;
+    sequence =[];
+    iterator = 0;
+    buttons = ["red","green","blue","yellow"];
+
+    function check(color){
+      if (gameStarted){
+        if (color !== sequence[iterator]){
+        sequence = [];
+        level = 1;
+        iterator = 0;
+        $("h1").text("Game Over, Press any Key to Restart");
+        $("body").css("background-color","red");
+        setTimeout(()=>{
+          $("body").css("background-color", '#011F3F');
+        },100);
+        gameStarted = false;
+
+      }
+      else{
+        if (iterator+1 === level){
+          level ++;
+          iterator =0;
+          $("h1").text("Level "+level);
+          setTimeout(generateNext, 1000);
+        }
+        else{
+          iterator ++;
+        }
+        
+      }
+      }
+      
     }
 
-    $(document).keydown(function () {
-      if (!gameStarted) {
-        $("h1").text("Level " + level);
-        $("body").css("background-color", "#011F3F");
+    function generateNext(){
+      var next_color = buttons[Math.floor(Math.random()*4)];
+      sequence.push(next_color);
+      displayAnimation(next_color);
+      makeSound(next_color);
+    }
+
+    
+    $(document).keydown(()=>{
+      if (!gameStarted){
         gameStarted = true;
-        $(".btn").click(function () {
-          var color = this.id;
-          playSound(color);
-          displayAnimation(color);
-          checkValidity(color);
-        });
-        startGame();
+        $("h1").text("Level "+ level);
+        generateNext();
+        
       }
     });
 
-    function checkValidity(color) {
-      if (color === sequence[iterator]) {
-        iterator++;
-        if (iterator === sequence.length) {
-          level++;
-          $("h1").text("Level " + level);
-          setTimeout(nextSequence, 1000);
-        }
-      } else {
-        gameStarted = false;
-        $("h1").text("Game Over, Press Any Key to Restart");
-        $("body").css("background-color", "red");
-        $("body").css("background-color", "#011F3F"); // Revert back to original color
-      }
-    }
+    buttons.forEach(color => {
+          $(`#${color}`).click(function (){
+            
+            if (gameStarted){
+              var color =  this.id;
+              displayAnimation(color);
+              makeSound(color);
+              check(color);
+            }
+            
+          })
+  
+    });
   </script>
 </body>
 
